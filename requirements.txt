@@ -1,3 +1,10 @@
 streamlit
 requests
 numpy
+datetime
+matplotlib
+pandas
+folium
+streamlit_folium
+plotly
+datetime
