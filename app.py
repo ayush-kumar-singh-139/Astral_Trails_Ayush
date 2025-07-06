@@ -407,7 +407,7 @@ with tabs[5]:  # Mission Dose Comparator Tab
         """Fetch live radiation data from NASA and ESA APIs with fallback."""
         try:
             # ---- ISS Data (NASA) ----
-            iss_response = requests.get("https://api.nasa.gov/insight_weather/?api_key=DEMO_KEY&feedtype=json&ver=1.0")
+            iss_response = requests.get("https://api.nasa.gov/insight_weather/?api_key=sOgjZydwNkBDaiAYKLRaXZgkHue0ZXtsL4Zov7YD&feedtype=json&ver=1.0")
             iss_data = iss_response.json()
             iss_dose = iss_data.get("rad", {}).get("daily_average", 0.3)  # mSv/day
     
