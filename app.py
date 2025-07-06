@@ -57,11 +57,17 @@ with tabs[0]:  # Mission Dose Comparator Tab
             esa_response = requests.get("https://swe.ssa.esa.int/radiation/api/data/latest")
             esa_data = esa_response.json()
             
+            # return {
+            #     "iss": iss_dose,
+            #     "lunar": esa_data.get("lunar_surface", 0.5),
+            #     "mars_transit": esa_data.get("mars_transit", 1.8),
+            #     "deep_space": esa_data.get("galactic", 2.5)
+            # }
             return {
-                "iss": iss_dose,
-                "lunar": esa_data.get("lunar_surface", 0.5),
-                "mars_transit": esa_data.get("mars_transit", 1.8),
-                "deep_space": esa_data.get("galactic", 2.5)
+                "iss": 0.3,  # mSv/day
+                "lunar": 0.5,
+                "mars_transit": 1.8,
+                "deep_space": 2.5
             }
             
         except Exception as e:
