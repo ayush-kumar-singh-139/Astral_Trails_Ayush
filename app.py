@@ -103,15 +103,6 @@ with tabs[1]:
         folium.CircleMarker(location=[lat, lon], radius=6, popup=f"Shower: {intensity}", color=color,
                             fill=True, fill_opacity=0.7).add_to(m)
     folium_static(m)
-    st.markdown("###  Hotspot Detector")
-    high_intensity = df[df["intensity"] == "High"]
-
-    if not high_intensity.empty:
-      st.markdown("High-intensity showers detected at the following locations:")
-      st.dataframe(high_intensity[["latitude", "longitude"]])
-    else:
-      st.info("No high-intensity showers found in the current mock data.")
-    
 
 # Tab 3: Biological Effects
 with tabs[2]:
