@@ -49,13 +49,13 @@ with tabs[0]:  # Mission Dose Comparator Tab
         """Fetch live radiation data from NASA and ESA APIs with fallback."""
         try:
             # ---- ISS Data (NASA) ----
-            iss_response = requests.get("https://api.nasa.gov/insight_weather/?api_key=sOgjZydwNkBDaiAYKLRaXZgkHue0ZXtsL4Zov7YD&feedtype=json&ver=1.0")
-            iss_data = iss_response.json()
-            iss_dose = iss_data.get("rad", {}).get("daily_average", 0.3)  # mSv/day
+            # iss_response = requests.get("https://api.nasa.gov/insight_weather/?api_key=sOgjZydwNkBDaiAYKLRaXZgkHue0ZXtsL4Zov7YD&feedtype=json&ver=1.0")
+            # iss_data = iss_response.json()
+            # iss_dose = iss_data.get("rad", {}).get("daily_average", 0.3)  # mSv/day
     
-            # ---- Lunar/Mars Data (ESA SIS) ----
-            esa_response = requests.get("https://swe.ssa.esa.int/radiation/api/data/latest")
-            esa_data = esa_response.json()
+            # # ---- Lunar/Mars Data (ESA SIS) ----
+            # esa_response = requests.get("https://swe.ssa.esa.int/radiation/api/data/latest")
+            # esa_data = esa_response.json()
             
             # return {
             #     "iss": iss_dose,
