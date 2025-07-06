@@ -36,16 +36,11 @@ Welcome to the **Cosmic Radiation Research Dashboard** — an interactive platfo
 
 # Main Feature Tabs
 tabs = st.tabs([
-    "Radiation Risk Calculator",
-    "Live Cosmic Ray Shower Map",
-    "Biological Effects Visualizer",
-    "Effects on Electronics",
-    "Cosmic Ray Data Explorer",
     "Mission Dose Comparator"
 ])
 
 
-with tabs[5]:  # Mission Dose Comparator Tab
+with tabs[0]:  # Mission Dose Comparator Tab
     import plotly.express as px
     from fpdf import FPDF
     
@@ -265,10 +260,3 @@ with tabs[5]:  # Mission Dose Comparator Tab
                     mime="application/pdf"
                 )
 
-# FOOTER
-st.markdown(f"""
----
-<p style='text-align: center; color: gray'>
-Built by Ayush Kumar Singh | Last updated: {datetime.datetime.now().strftime('%B %d, %Y')}
-</p>
-""", unsafe_allow_html=True)
