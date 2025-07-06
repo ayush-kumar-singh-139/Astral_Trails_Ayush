@@ -215,26 +215,7 @@ with tabs[0]:  # Mission Dose Comparator Tab
     )
     st.plotly_chart(fig_sim, use_container_width=True)
 
-    # ---- 9. 3D TRAJECTORY VISUALIZATION ----
-    st.subheader("🌌 Mission Trajectory (Simulated)")
-    # Mock trajectory data (replace with real ephemeris data)
-    trajectory_data = {
-        "x": np.random.normal(0, 1, 100),
-        "y": np.random.normal(0, 1, 100),
-        "z": np.random.normal(0, 0.5, 100),
-        "radiation": np.random.uniform(0.1, 2.0, 100)
-    }
-    
-    fig_3d = px.scatter_3d(
-        trajectory_data,
-        x="x", y="y", z="z",
-        color="radiation",
-        color_continuous_scale="Hot",
-        title="Radiation Exposure Along Trajectory (Relative)"
-    )
-    st.plotly_chart(fig_3d, use_container_width=True)
-
-    # ---- 10. EXPORT REPORT ----
+    # ---- 9. EXPORT REPORT ----
     st.subheader("📤 Generate Mission Report")
     if st.button("📄 Generate PDF Report"):
         pdf = FPDF()
