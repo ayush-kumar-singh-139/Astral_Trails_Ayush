@@ -402,22 +402,35 @@ with tabs[5]:  # Mission Dose Comparator Tab
     from fpdf import FPDF
     import altair as alt
 
-    # ---- 1. REAL-WORLD DATA INTEGRATION (NASA/ESA) ----
-    @st.cache_data(ttl=3600)
+    @st.cache_data(ttl=3600)  # Cache for 1 hour
     def fetch_space_radiation_data():
-        """Fetch live radiation data from NASA/ESA APIs with fallback."""
+        """Fetch live radiation data from NASA and ESA APIs with fallback."""
         try:
-            # Mock API response (replace with actual API calls)
-            mock_data = {
+            # ---- ISS Data (NASA) ----
+            iss_response = requests.get("https://api.nasa.gov/insight_weather/?api_key=DEMO_KEY&feedtype=json&ver=1.0")
+            iss_data = iss_response.json()
+            iss_dose = iss_data.get("rad", {}).get("daily_average", 0.3)  # mSv/day
+    
+            # ---- Lunar/Mars Data (ESA SIS) ----
+            esa_response = requests.get("https://swe.ssa.esa.int/radiation/api/data/latest")
+            esa_data = esa_response.json()
+            
+            return {
+                "iss": iss_dose,
+                "lunar": esa_data.get("lunar_surface", 0.5),
+                "mars_transit": esa_data.get("mars_transit", 1.8),
+                "deep_space": esa_data.get("galactic", 2.5)
+            }
+            
+        except Exception as e:
+            st.warning(f"⚠️ Could not fetch live data: {str(e)}. Using fallback values.")
+            return {
                 "iss": 0.3,  # mSv/day
                 "lunar": 0.5,
                 "mars_transit": 1.8,
                 "deep_space": 2.5
             }
-            return mock_data
-        except:
-            return {"iss": 0.3, "lunar": 0.5, "mars_transit": 1.8, "deep_space": 2.5}
-
+    
     radiation_data = fetch_space_radiation_data()
 
     # ---- 2. DYNAMIC SHIELDING MODEL ----
