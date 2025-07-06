@@ -103,15 +103,6 @@ with tabs[1]:
         folium.CircleMarker(location=[lat, lon], radius=6, popup=f"Shower: {intensity}", color=color,
                             fill=True, fill_opacity=0.7).add_to(m)
     folium_static(m)
-    st.markdown("###  Hotspot Detector")
-    high_intensity = df[df["intensity"] == "High"]
-
-    if not high_intensity.empty:
-      st.markdown("High-intensity showers detected at the following locations:")
-      st.dataframe(high_intensity[["latitude", "longitude"]])
-    else:
-      st.info("No high-intensity showers found in the current mock data.")
-    
 
 # Tab 3: Biological Effects
 with tabs[2]:
@@ -577,37 +568,6 @@ with tabs[5]:  # Mission Dose Comparator Tab
     )
     st.plotly_chart(fig_sim, use_container_width=True)
 
-    # ---- 9. EXPORT REPORT ----
-    st.subheader("📤 Generate Mission Report")
-    if st.button("📄 Generate PDF Report"):
-        pdf = FPDF()
-        pdf.add_page()
-        pdf.set_font("Arial", size=12)
-        
-        # Report content
-        pdf.cell(200, 10, txt="COSMIC RADIATION MISSION REPORT", ln=1, align="C")
-        pdf.ln(10)
-        pdf.multi_cell(0, 10, txt=f"""
-        Mission Profile: {mission}
-        Duration: {duration} days
-        Shielding: {material} ({thickness} g/cm²)
-        Solar Activity: {solar_phase}
-        ------------------------------
-        Total Estimated Dose: {total_dose:.1f} mSv
-        Highest Organ Dose: {max(organ_doses.values()):.1f} mSv (to {max(organ_doses, key=organ_doses.get)})
-        """)
-        
-        # Save and offer download
-        from tempfile import NamedTemporaryFile
-        with NamedTemporaryFile(delete=False, suffix=".pdf") as tmp:
-            pdf.output(tmp.name)
-            with open(tmp.name, "rb") as f:
-                st.download_button(
-                    "⬇️ Download Full Report",
-                    f.read(),
-                    "radiation_mission_report.pdf",
-                    mime="application/pdf"
-                ) 
 # Tab 7: Space Weather
 with tabs[6]:
     import requests
