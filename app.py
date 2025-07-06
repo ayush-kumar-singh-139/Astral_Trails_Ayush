@@ -53,9 +53,9 @@ with tabs[0]:  # Mission Dose Comparator Tab
             # iss_data = iss_response.json()
             # iss_dose = iss_data.get("rad", {}).get("daily_average", 0.3)  # mSv/day
     
-            # # ---- Lunar/Mars Data (ESA SIS) ----
-            # esa_response = requests.get("https://swe.ssa.esa.int/radiation/api/data/latest")
-            # esa_data = esa_response.json()
+            # ---- Lunar/Mars Data (ESA SIS) ----
+            esa_response = requests.get("https://swe.ssa.esa.int/radiation/api/data/latest")
+            esa_data = esa_response.json()
             
             # return {
             #     "iss": iss_dose,
